@@ -1,0 +1,25 @@
+server:
+  port: 12309
+#spring:
+#  mail:
+#    host: smtp.qq.com
+#    username: 2814256929@qq.com
+#    password: ioantrnjwwifddbj
+#    properties: {"mail.smtp.auth":"true","mail.smtp.starttls.enable":"true","mail.smtp.starttls.required":"true"}
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable:
+#            required:
+# mail.smtp.ssl.socketFactory.class com.sun.mail.util.MailSSLSocketFactory
+# mail.smtp.socketFactory.class javax.net.ssl.SSLSocketFactory
+spring:
+  mail:
+    username: DuMM@yunzhiqu.com
+    password: 19960727DUming
+    host: smtp.exmail.qq.com
+    properties: {"mail.smtp.auth":"true","mail.smtp.socketFactory.fallback":"false",
+                 "mail.smtp.socketFactory.port":"465","mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                "mail.smtp.ssl.enable":"true"}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--父工程只做声明依赖-->
+    <groupId>com.dmm</groupId>
+    <artifactId>springboot_study</artifactId>
+    <version>20190704</version>
+    <modules>
+        <module>springboot_rabbitmq</module>
+        <module>springboot_config</module>
+        <module>springboot_apiversion</module>
+        <module>springboot_jsp</module>
+        <module>springboot_freemarker</module>
+        <module>springboot_thymeleaf</module>
+        <module>springboot-jdbcTemplate</module>
+        <module>springboot-multidata</module>
+        <module>springboot-multidata-druid</module>
+        <module>springboot-cache</module>
+        <module>springboot-quartz</module>
+        <module>springboot-mq-test</module>
+        <module>springboot-reids</module>
+        <module>springboot-redis-limit</module>
+        <module>springboot_jpa</module>
+        <module>springboot-email</module>
+        <module>springboot-neo4j</module>
+        <module>springboot-async</module>
+        <module>springboot-easyexcel</module>
+        <module>springboot-mongodb</module>
+    </modules>
+
+    <packaging>pom</packaging>
+    <parent>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>2.0.0.RELEASE</version>-->
+        <!--父工程只做声明依赖，采用parent的顶级父级做声明-->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.0.0.RELEASE</version>
+        <relativePath/><!--relativePath元素中的地址–本地仓库–远程仓库-->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>

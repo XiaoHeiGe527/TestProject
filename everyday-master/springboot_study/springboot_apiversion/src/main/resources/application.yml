@@ -1,0 +1,5 @@
+server:
+  port: 8888
+
+myfeign:
+  ip: http://127.0.0.1:8880

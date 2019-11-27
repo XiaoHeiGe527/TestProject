@@ -1,0 +1,36 @@
+server:
+  port: 12308
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/test1?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    druid:
+      max-wait: 10000
+  redis:
+    password: 123456
+    database: 0
+    host: 192.168.6.63
+
+  # 项目名称
+  application:
+    name: dmm
+#  session:
+#    #会话存储类型
+#    store-type: redis
+mybatis:
+  mapper-locations: mapper/**Mapper.xml
+  type-aliases-package: com.dmm.entry
+expire:
+  time: 60
+
+#logging:
+#  level:
+#    com.dmm.mapper: debug
+logback:
+   logDir: ./log
+#   level: error
+#logging:
+#  config: classpath:logback-spring.xml

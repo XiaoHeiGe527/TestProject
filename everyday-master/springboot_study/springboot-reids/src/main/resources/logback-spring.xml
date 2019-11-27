@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--application.yml 传递参数，不能使用logback 自带的<property>标签 -->
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+    <springProperty scope="context" name="logDir" source="logback.logDir"/>
+    <!--<springProperty scope="context" name="logLevel" source="logback.level"/>-->
+
+
+    <contextName>${appName}</contextName>
+
+    <property name="log_dir" value="${logDir}" />
+    <property name="maxHistory" value="3"/>
+    <!--<property name="level" value="${logLevel}"/>-->
+
+    <!--输出到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %contextName [%thread] %-5level %logger -%msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_dir}/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/info-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %contextName [%thread] %-5level %logger -%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--  level 表示要输出的日志级别，如果在service输出的日志级别低于此，则不输出-->
+
+    <logger name="com.dmm" additivity="false" level="debug">
+        <appender-ref ref="file"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!--日志等级受同一个文件的其他logger的影响-->
+    <!--<logger name="java.sql.PreparedStatement" additivity="false" level="debug">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
+    <logger name="com.dmm.mapper" additivity="false" level="DEBUG">
+        <appender-ref ref="file"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <!--控制台输出级别-->
+    <root level="debug">
+
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="file" />-->
+
+    </root>
+
+
+</configuration>

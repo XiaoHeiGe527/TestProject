@@ -1,0 +1,13 @@
+server:
+  port: 12310
+#async:
+#  executor:
+#    thread:
+#      name:
+#       prefix: thread-test-
+#      core:
+#        pool:
+#          size: 5
+#      max:
+#        pool:
+#          size: 5

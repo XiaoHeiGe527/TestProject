@@ -1,0 +1,35 @@
+server:
+  port: 8880
+  servlet:
+    context-path: /dmm
+#logging:
+#  level:
+#    root: info
+#    springframework:
+#      web: info
+#  file: e:\\dmm.log
+#  pattern:
+#    console: %d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
+#logging:
+#  # logback的日志配置
+#  config: classpath:logback-spring.xml
+#
+#  # log4j的日志配置
+#  #config: classpath:log4j.xml
+#spring:
+#  profiles:
+#    active: test.dev
+#  # 静态资源的配置
+#  resources:
+#    static-locations: classpath:/public/
+#    file: %d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
+#  devtools:
+#    restart:
+#      enabled: true
+
+scp:
+  hostname: 116.62.172.166
+  port: 22
+  username: yunny
+  password: yunny
+  localPath: /aa

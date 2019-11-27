@@ -1,0 +1,7 @@
+1.自动配置的包位于
+org.springframework.boot:
+spring-boot-autoconfigure 的配置
+有关于web的配置，还有关于springmvc的配置是webmvcauto
+
+配置消息转换器的地址在
+org.springframework.http.converter.StringHttpMessageConverter

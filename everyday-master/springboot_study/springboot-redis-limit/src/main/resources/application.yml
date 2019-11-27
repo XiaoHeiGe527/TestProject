@@ -1,0 +1,6 @@
+spring:
+  redis:
+    password: 123456
+    database: 1
+server:
+  port: 12309
