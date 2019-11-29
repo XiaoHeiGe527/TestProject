@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitmqConfig {
 
+    //交換機
     public static final String EXCHANGE_A = "my-mq-exchange_A";
     public static final String EXCHANGE_B = "my-mq-exchange_B";
     public static final String EXCHANGE_C = "my-mq-exchange_C";
@@ -71,6 +72,7 @@ public class RabbitmqConfig {
     // 定义绑定规则 队列 交换机 规则 a a a
     @Bean
     public Binding bindingAAA(){
+        System.out.println("绑定AAA 绑定器 ");
         return BindingBuilder.bind(sendA()).to(aExchange()).with(ROUTINGKEY_A).noargs();
 
         //BindingBuilder.bind(queueA()).to(defaultExchange()).with(RabbitConfig.ROUTINGKEY_A);

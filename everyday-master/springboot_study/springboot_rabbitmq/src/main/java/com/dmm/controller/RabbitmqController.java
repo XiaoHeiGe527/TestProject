@@ -1,11 +1,15 @@
 package com.dmm.controller;
 
+import com.dmm.test.MsgProducer;
 import com.dmm.utils.ProductMq;
 import com.dmm.utils.RabbitmqUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/mq")
@@ -16,6 +20,9 @@ public class RabbitmqController {
 
     @Autowired
     private ProductMq productMq;
+
+    @Autowired
+    private MsgProducer firstSender;
 
     @RequestMapping
     public void index(){
@@ -29,7 +36,7 @@ public class RabbitmqController {
 //        for (long i=0;i<id;i++)
 //        {
             rabbitmqUtils.sendDmm(id);
-       // }
+//        }
     }
 
     @RequestMapping(value = "/A/{id}")
@@ -66,5 +73,33 @@ public class RabbitmqController {
         System.out.println(id+"0000000000000000");
         rabbitmqUtils.sendId(id);
     }
+
+
+
+    @RequestMapping(value = "/channel/{id}")
+    public void channelTest(@PathVariable Long id){
+        System.out.println(id+"0000000000000000");
+        rabbitmqUtils.sendId(id);
+    }
+
+
+
+//    @GetMapping("/send")
+//    public String send(String message) {
+//        String uuid = UUID.randomUUID().toString();
+////        firstSender.send(uuid, message);
+//        firstSender.sendAdmin(uuid, message);
+//        return uuid;
+//    }
+
+
+    @GetMapping("/firstSend")
+    public String testSend(String message) {
+        String uuid = UUID.randomUUID().toString();
+//        firstSender.send(uuid, message);
+        firstSender.firstSend(message);
+        return uuid;
+    }
+//MsgProducer
 
 }
