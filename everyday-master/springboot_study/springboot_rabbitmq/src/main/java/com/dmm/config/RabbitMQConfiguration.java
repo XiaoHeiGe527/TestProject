@@ -11,6 +11,8 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.retry.MessageRecoverer;
+import org.springframework.amqp.rabbit.retry.RepublishMessageRecoverer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -96,6 +98,11 @@ public class RabbitMQConfiguration {
                             "消费端接收到消息:" + new String(message.getBody()));
                     System.out.println("[deliverTag:" + deliverTag + "] " + message.getMessageProperties().getReceivedRoutingKey());
 
+//                    if (deliverTag%2 == 0) {
+//                        System.out.println("消息处理失败，重新返回队列");
+//                        throw new Exception("数据处理错误");
+//                    }
+
                     if (deliverTag%2 == 0) {
                         System.out.println("消息处理失败，重新返回队列");
                         throw new Exception("数据处理错误");
@@ -104,12 +111,17 @@ public class RabbitMQConfiguration {
                     channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+                    //
+                //channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
+                    //channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+
+                    channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
                 }
             }
         });
         return container;
 
     }
+
 
 }

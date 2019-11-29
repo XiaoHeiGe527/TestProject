@@ -8,15 +8,19 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component
 public class MsgReceiver {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RabbitListener(queues = {"first-queue"})
-    public void handleMessage(String messageStr, Message message, Channel channel) {
+    public void handleMessage(String messageStr, Message message, Channel channel) throws IOException {
 
         System.out.println(5/0);
+
+        System.out.println("first-queue 方法执行完毕！");
 
     }
 
