@@ -11,16 +11,19 @@ public class RabbitmqListener {
     @RabbitListener(queues = "dmm")
     @RabbitHandler
     public void dmm(long id){
+
         System.out.println("接受-----"+id);
     }
     @RabbitListener(queues = "dmm")
     @RabbitHandler
     public void dmm2(long id){
+
         System.out.println("2接受-----"+id);
     }
     @RabbitListener(queues = "dmm")
     @RabbitHandler
     public void dmm3(long id){
+
         System.out.println("3接受-----"+id);
     }
 

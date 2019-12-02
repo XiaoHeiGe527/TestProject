@@ -13,7 +13,9 @@ public class ConsumerMq {
 
     @RabbitListener(queues = "hello")
     public void process(Message message, Channel channel) throws IOException {
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(),true);
+        System.out.println("dbhjdcjkjk-----------------------------");
+        System.out.println(1/0);
+        //channel.basicAck(message.getMessageProperties().getDeliveryTag(),true);
         System.out.println(message.getBody().toString()+"===============");
     }
 

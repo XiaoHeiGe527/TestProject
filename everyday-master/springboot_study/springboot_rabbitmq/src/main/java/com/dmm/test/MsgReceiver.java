@@ -18,6 +18,7 @@ public class MsgReceiver {
     @RabbitListener(queues = {"first-queue"})
     public void handleMessage(String messageStr, Message message, Channel channel) throws IOException {
 
+        System.out.println("======================first-queue=======================");
         System.out.println(5/0);
 
         System.out.println("first-queue 方法执行完毕！");
