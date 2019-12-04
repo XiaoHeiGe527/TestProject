@@ -81,46 +81,45 @@ public class RabbitMQConfiguration {
 
 
 //  SimpleMessageListener  bean 消費消息的模式
-//    @Bean
-//    public SimpleMessageListenerContainer messageContainer() {
-//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory());
-//        container.setQueueNames("first-queue");
-//        container.setExposeListenerChannel(true);
-//        container.setMaxConcurrentConsumers(1);
-//        container.setConcurrentConsumers(1);
-//        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
-//        container.setMessageListener(new ChannelAwareMessageListener() {
-//
-//            public void onMessage(Message message, Channel channel) throws Exception {
-//                try {
-//                    long deliverTag = message.getMessageProperties().getDeliveryTag();
-//                    System.out.println(
-//                            "消费端接收到消息:" + new String(message.getBody()));
-//                    System.out.println("[deliverTag:" + deliverTag + "] " + message.getMessageProperties().getReceivedRoutingKey());
-//
-////                    if (deliverTag%2 == 0) {
-////                        System.out.println("消息处理失败，重新返回队列");
-////                        throw new Exception("数据处理错误");
-////                    }
-//
-//                    if (deliverTag%2 == 0) {
-//                        System.out.println("消息处理失败，重新返回队列");
-//                        throw new Exception("数据处理错误");
-//                    }
-//
-//                    channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    //
-//               channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
-//                    //channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-//                    // channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
-//                }
-//            }
-//        });
-//        return container;
-//
-//    }
+    @Bean
+    public SimpleMessageListenerContainer messageContainer() {
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory());
+        container.setQueueNames("first-queue");
+        container.setExposeListenerChannel(true);
+        container.setMaxConcurrentConsumers(1);
+        container.setConcurrentConsumers(1);
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        container.setMessageListener(new ChannelAwareMessageListener() {
+
+            public void onMessage(Message message, Channel channel) throws Exception {
+                try {
+                    long deliverTag = message.getMessageProperties().getDeliveryTag();
+                    System.out.println(
+                            "消费端接收到消息:" + new String(message.getBody()));
+                    System.out.println("[deliverTag:" + deliverTag + "] " + message.getMessageProperties().getReceivedRoutingKey());
+
+                    System.out.println(5/0);
+
+                    if (deliverTag%2 == 0) {
+                        System.out.println("消息处理失败，重新返回队列");
+                        throw new Exception("数据处理错误");
+                    }
+
+                    channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //
+
+                    logger.error("====================消息消费发生异常==================="+e);
+               channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
+                    //channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+                    // channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
+                }
+            }
+        });
+        return container;
+
+    }
 
 
 }

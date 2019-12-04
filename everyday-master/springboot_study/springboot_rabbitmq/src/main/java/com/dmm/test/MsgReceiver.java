@@ -15,15 +15,15 @@ public class MsgReceiver {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RabbitListener(queues = {"first-queue"})
-    public void handleMessage(String messageStr, Message message, Channel channel) throws IOException {
-
-        System.out.println("======================first-queue=======================");
-        System.out.println(5/0);
-
-        System.out.println("first-queue 方法执行完毕！");
-
-    }
+//    @RabbitListener(queues = {"first-queue"})
+//    public void handleMessage(String messageStr, Message message, Channel channel) throws IOException {
+//
+//        System.out.println("======================first-queue=======================");
+//        System.out.println(5/0);
+//
+//        System.out.println("first-queue 方法执行完毕！");
+//
+//    }
 
     @RabbitListener(queues = {"second-queue"}, containerFactory = "rabbitListenerContainerFactory")
     public void handleMessage2(String messageStr, Message message, Channel channel) throws Exception {
