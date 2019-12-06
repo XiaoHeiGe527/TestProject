@@ -73,9 +73,9 @@ public class MsgProducer {
 
         String uuid = UUID.randomUUID().toString();
         CorrelationData correlationId = new CorrelationData(uuid);
-        System.out.println("生成消息成功，id:" + correlationId.getId());
+        //System.out.println("生成消息成功，id:" + correlationId.getId());
         rabbitTemplate.convertAndSend(ExchangeConfig.EXCHANGE, RabbitConfig.ROUTINGKEY1, message,correlationId);
-        System.out.println("消息发送到RabbitMQ服务器成功，id:" + correlationId.getId());
+        //System.out.println("消息发送到RabbitMQ服务器成功，id:" + correlationId.getId());
 
 
         //   return BindingBuilder.bind(queueConfig.firstQueue()).to(exchangeConfig.directExchange()).with(RabbitConfig.ROUTINGKEY1);
